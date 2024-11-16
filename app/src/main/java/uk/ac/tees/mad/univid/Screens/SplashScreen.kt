@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.runtime.Composable
@@ -30,7 +29,6 @@ import androidx.navigation.NavHostController
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
-import uk.ac.tees.mad.univid.AppNavigation
 import uk.ac.tees.mad.univid.AppNavigations
 import uk.ac.tees.mad.univid.R
 
@@ -82,7 +80,7 @@ fun SplashScreen(navController: NavHostController) {
                     alpha = alpha
                 )
         )
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(40.dp))
         LinearProgressIndicator()
     }
 }
