@@ -1,5 +1,6 @@
 package uk.ac.tees.mad.univid
 
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -17,15 +18,17 @@ object RegisterScreen : AppNavigations("register_screen")
 @Composable
 fun AppNavigation(){
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = AppNavigations.SplashScreen.route ){
-        composable(AppNavigations.SplashScreen.route){
+    Surface{
+    NavHost(navController = navController, startDestination = AppNavigations.SplashScreen.route ) {
+        composable(AppNavigations.SplashScreen.route) {
             SplashScreen(navController = navController)
         }
-        composable(AppNavigations.LoginScreen.route){
+        composable(AppNavigations.LoginScreen.route) {
             LoginScreen(navController = navController)
         }
-        composable(AppNavigations.RegisterScreen.route){
+        composable(AppNavigations.RegisterScreen.route) {
             RegisterScreen(navController = navController)
         }
+    }
     }
 }
