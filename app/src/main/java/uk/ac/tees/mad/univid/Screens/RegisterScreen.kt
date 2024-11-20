@@ -54,10 +54,12 @@ fun RegisterScreen(navController: NavHostController) {
         mutableStateOf("")
     }
     Column(modifier = Modifier.fillMaxSize()) {
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(40.dp))
         Icon(imageVector = Icons.Default.KeyboardArrowLeft, contentDescription = null,
-            modifier = Modifier.size(40.dp))
-        Spacer(modifier = Modifier.height(30.dp))
+            modifier = Modifier.size(40.dp).clickable {
+                navController.popBackStack()
+            })
+        Spacer(modifier = Modifier.height(20.dp))
         Image(
             painter = painterResource(id = R.drawable.tenant_finder_appicon),
             contentDescription = null, modifier = Modifier
@@ -65,7 +67,7 @@ fun RegisterScreen(navController: NavHostController) {
                 .clip(CircleShape)
                 .align(Alignment.CenterHorizontally)
         )
-        Spacer(modifier = Modifier.height(50.dp))
+        Spacer(modifier = Modifier.height(40.dp))
         Text(
             text = "Register", fontFamily = poppins, fontWeight = FontWeight.SemiBold,
             fontSize = 28.sp, modifier = Modifier.padding(horizontal = 24.dp)
