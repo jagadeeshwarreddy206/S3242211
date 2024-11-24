@@ -3,6 +3,8 @@ package uk.ac.tees.mad.univid
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,6 +13,8 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import uk.ac.tees.mad.univid.Models.Api.ApiResponse
 import uk.ac.tees.mad.univid.Models.User
@@ -26,8 +30,8 @@ class MainViewModel @Inject constructor(
     val isLoading = mutableStateOf(false)
     val isSignedIn = mutableStateOf(false)
 
-    private val _response = MutableLiveData<ApiResponse>()
-    val response: LiveData<ApiResponse> get() = _response
+    private val _response = MutableStateFlow<ApiResponse?>(null)
+    val response: StateFlow<ApiResponse?> = _response
 
     init {
         if (auth.currentUser != null){

@@ -34,7 +34,7 @@ fun AppNavigation(){
             RegisterScreen(navController = navController, vm = vm)
         }
         composable(AppNavigations.HomeScreen.route){
-            HomeScreen()
+            HomeScreen(vm, navController)
         }
     }
     }
