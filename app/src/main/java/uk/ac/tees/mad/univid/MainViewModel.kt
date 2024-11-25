@@ -17,6 +17,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import uk.ac.tees.mad.univid.Models.Api.ApiResponse
+import uk.ac.tees.mad.univid.Models.Api.Data
 import uk.ac.tees.mad.univid.Models.User
 import javax.inject.Inject
 
@@ -99,5 +100,13 @@ class MainViewModel @Inject constructor(
 
             }
         }
+    }
+
+    fun searchProperty(search : String) : List<Data>{
+        val trimmedSearch = search.trim().lowercase()
+        val filteredList = _response.value?.data?.filter {
+            it.propertyTypeFullDescription.trim().lowercase().contains(trimmedSearch)
+        }
+        return filteredList ?: emptyList()
     }
 }
