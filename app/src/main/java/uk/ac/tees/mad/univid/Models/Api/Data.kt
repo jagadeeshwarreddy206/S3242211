@@ -1,5 +1,6 @@
 package uk.ac.tees.mad.univid.Models.Api
 
+
 data class Data(
     val addedOrReduced: String,
     val auction: Boolean,

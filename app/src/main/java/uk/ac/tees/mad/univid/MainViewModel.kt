@@ -15,6 +15,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 import uk.ac.tees.mad.univid.Models.Api.ApiResponse
 import uk.ac.tees.mad.univid.Models.Api.Data
@@ -108,5 +109,13 @@ class MainViewModel @Inject constructor(
             it.propertyTypeFullDescription.trim().lowercase().contains(trimmedSearch)
         }
         return filteredList ?: emptyList()
+    }
+
+    fun getPropertyById(id: String): Data? {
+        val actualId = id.toIntOrNull() ?: return null
+        val result = _response.value?.data?.find {
+            it.id == actualId
+        }
+        return result
     }
 }

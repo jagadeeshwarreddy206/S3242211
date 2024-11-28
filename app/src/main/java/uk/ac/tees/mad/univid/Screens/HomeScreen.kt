@@ -40,6 +40,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import uk.ac.tees.mad.univid.AppNavigations
 import uk.ac.tees.mad.univid.MainViewModel
 import uk.ac.tees.mad.univid.Models.Api.Data
 import uk.ac.tees.mad.univid.Models.Api.Location
@@ -139,7 +140,10 @@ fun HomeScreen(vm: MainViewModel, navController: NavController) {
                                 imageUrl = items.propertyImages,
                                 price = items.price,
                                 propertyLabel = items.productLabel,
-                                description = items.propertyTypeFullDescription
+                                description = items.propertyTypeFullDescription,
+                                onNavigate = {
+                                    navController.navigate(AppNavigations.DetailScreen.createRoute(items.id))
+                                }
                             )
                     }
                 }
@@ -161,7 +165,10 @@ fun HomeScreen(vm: MainViewModel, navController: NavController) {
                                     imageUrl = items.propertyImages,
                                     price = items.price,
                                     propertyLabel = items.productLabel,
-                                    description = items.propertyTypeFullDescription
+                                    description = items.propertyTypeFullDescription,
+                                    onNavigate = {
+                                        navController.navigate(AppNavigations.DetailScreen.createRoute(items.id))
+                                    }
                                 )
                             }
                         }
@@ -180,13 +187,17 @@ fun propertyView(
     imageUrl: PropertyImages?,
     price: Price?,
     propertyLabel: ProductLabel?,
-    description : String
+    description : String,
+    onNavigate:() -> Unit
 ) {
     Box(modifier = Modifier) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(220.dp)
+                .clickable {
+                    onNavigate()
+                }
         ) {
             AsyncImage(
                 model = imageUrl?.mainImageSrc ?: "",
