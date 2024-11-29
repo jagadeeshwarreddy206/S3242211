@@ -52,7 +52,7 @@ fun AppNavigation(){
         ) { backStackEntry ->
             val id = backStackEntry.arguments?.getString("id") ?: ""
 
-            DetailScreen(id)
+            DetailScreen(id, vm, navController)
         }
     }
     }
