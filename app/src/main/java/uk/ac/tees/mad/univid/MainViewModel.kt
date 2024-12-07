@@ -15,10 +15,19 @@ import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
+import uk.ac.tees.mad.univid.Data.PropertyData
 import uk.ac.tees.mad.univid.Models.Api.ApiResponse
+import uk.ac.tees.mad.univid.Models.Api.Customer
 import uk.ac.tees.mad.univid.Models.Api.Data
+import uk.ac.tees.mad.univid.Models.Api.ListingUpdate
+import uk.ac.tees.mad.univid.Models.Api.Location
+import uk.ac.tees.mad.univid.Models.Api.LozengeModel
+import uk.ac.tees.mad.univid.Models.Api.Price
+import uk.ac.tees.mad.univid.Models.Api.ProductLabel
+import uk.ac.tees.mad.univid.Models.Api.PropertyImages
 import uk.ac.tees.mad.univid.Models.User
 import javax.inject.Inject
 
@@ -117,5 +126,76 @@ class MainViewModel @Inject constructor(
             it.id == actualId
         }
         return result
+    }
+
+    fun insertProperty(data: Data) {
+        val newData = data.toPropertyData()
+        viewModelScope.launch {
+            repository.insertProperty(newData)
+        }
+    }
+
+    fun deleteProperty(data: PropertyData) {
+        viewModelScope.launch {
+            repository.deleteProperty(data)
+        }
+    }
+
+    fun getProperties(){
+        viewModelScope.launch {
+            repository.getAllProperty().collect {
+                Log.d("Response DB",it.toString())
+            }
+        }
+    }
+
+    fun Data.toPropertyData(): PropertyData{
+        return PropertyData(
+            addedOrReduced = this.addedOrReduced,
+         auction = this.auction,
+         bathrooms = this.bathrooms,
+         bedrooms = this.bedrooms,
+         channel = this.channel,
+         commercial = this.commercial,
+         contactUrl = this.contactUrl,
+         countryCode = this.countryCode,
+         customer = this.customer,
+         development = this.development,
+         displayAddress = this.displayAddress,
+         displaySize = this.displaySize,
+         displayStatus = this.displayStatus,
+         enhancedListing = this.enhancedListing,
+         featuredProperty = this.featuredProperty,
+         feesApply = this.feesApply,
+         firstVisibleDate = this.firstVisibleDate,
+         formattedBranchName = this.formattedBranchName,
+         formattedDistance = this.formattedDistance,
+         hasBrandPlus = this.hasBrandPlus,
+         heading = this.heading,
+         hidden = this.hidden,
+         id = this.id,
+         isRecent = this.isRecent,
+         keywordMatchType = this.keywordMatchType,
+         listingUpdate = this.listingUpdate,
+         location = this.location,
+         lozengeModel = this.lozengeModel,
+         numberOfFloorplans = this.numberOfFloorplans,
+         numberOfImages = this.numberOfImages,
+         numberOfVirtualTours = this.numberOfVirtualTours,
+         onlineViewingsAvailable = this.onlineViewingsAvailable,
+         premiumListing = this.premiumListing,
+         price = this.price,
+         productLabel = this.productLabel,
+         propertyImages = this.propertyImages,
+         propertySubType = this.propertySubType,
+         propertyTypeFullDescription = this.propertyTypeFullDescription,
+         propertyUrl = this.propertyUrl,
+         residential = this.residential,
+         saved = this.saved,
+         showOnMap = this.showOnMap,
+         students = this.students,
+         summary = this.summary,
+         transactionType = this.transactionType
+        )
     }
 }

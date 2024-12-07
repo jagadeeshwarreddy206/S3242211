@@ -1,5 +1,6 @@
 package uk.ac.tees.mad.univid.Screens
 
+import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -24,6 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -34,6 +36,7 @@ import uk.ac.tees.mad.univid.ui.theme.poppins
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailScreen(id: String, vm: MainViewModel, navController: NavController) {
+    val context = LocalContext.current
     val property = vm.getPropertyById(id)
     val scrollState = rememberScrollState()
     Scaffold(
@@ -55,7 +58,11 @@ fun DetailScreen(id: String, vm: MainViewModel, navController: NavController) {
                         modifier = Modifier
                             .padding(end = 24.dp)
                             .size(30.dp)
-                            .align(Alignment.CenterVertically))
+                            .align(Alignment.CenterVertically)
+                            .clickable {
+                                vm.insertProperty(property!!)
+                            vm.getProperties()
+                            Toast.makeText(context, "Added to favourites", Toast.LENGTH_SHORT).show()})
                 }
             })
         }

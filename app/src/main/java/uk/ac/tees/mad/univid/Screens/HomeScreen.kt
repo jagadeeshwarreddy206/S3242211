@@ -68,7 +68,7 @@ fun HomeScreen(vm: MainViewModel, navController: NavController) {
         topBar = {
             TopAppBar(title = {
                 Row {
-                    Text(text = "Home Screen")
+                    Text(text = "Home")
                     Spacer(modifier = Modifier.weight(1f))
                     Icon(
                         imageVector = Icons.Default.Person,
@@ -104,8 +104,14 @@ fun HomeScreen(vm: MainViewModel, navController: NavController) {
                             modifier = Modifier
                                 .size(30.dp)
                         )
-                    })
+                    },
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(24.dp)),
+                    shape = RoundedCornerShape(24.dp)
+                )
+
                 Spacer(modifier = Modifier.width(4.dp))
+
                 Icon(
                     imageVector = Icons.Default.Search, contentDescription = "search",
                     modifier = Modifier
