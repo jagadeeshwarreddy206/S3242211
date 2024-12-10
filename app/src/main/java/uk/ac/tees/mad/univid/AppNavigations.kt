@@ -11,6 +11,7 @@ import androidx.navigation.navArgument
 import uk.ac.tees.mad.univid.Screens.DetailScreen
 import uk.ac.tees.mad.univid.Screens.HomeScreen
 import uk.ac.tees.mad.univid.Screens.LoginScreen
+import uk.ac.tees.mad.univid.Screens.ProfileScreen
 import uk.ac.tees.mad.univid.Screens.RegisterScreen
 import uk.ac.tees.mad.univid.Screens.SplashScreen
 
@@ -24,6 +25,7 @@ sealed class AppNavigations(val route : String){
             return "detail_screen/$id"
         }
     }
+    object ProfileScreen : AppNavigations("profile_screen")
 }
 
 @Composable
@@ -53,6 +55,9 @@ fun AppNavigation(){
             val id = backStackEntry.arguments?.getString("id") ?: ""
 
             DetailScreen(id, vm, navController)
+        }
+        composable(AppNavigations.ProfileScreen.route){
+            ProfileScreen(vm, navController)
         }
     }
     }

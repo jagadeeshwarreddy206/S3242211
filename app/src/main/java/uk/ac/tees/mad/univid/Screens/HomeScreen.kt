@@ -77,6 +77,7 @@ fun HomeScreen(vm: MainViewModel, navController: NavController) {
                             .align(Alignment.CenterVertically)
                             .padding(end = 18.dp)
                             .size(30.dp)
+                            .clickable { navController.navigate(AppNavigations.ProfileScreen.route) }
                     )
                 }
             })

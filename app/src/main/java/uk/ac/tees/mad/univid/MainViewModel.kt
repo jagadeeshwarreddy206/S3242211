@@ -44,6 +44,8 @@ class MainViewModel @Inject constructor(
     private val _response = MutableStateFlow<ApiResponse?>(null)
     val response: StateFlow<ApiResponse?> = _response
 
+    val userData = mutableStateOf<User?>(null)
+
     init {
         if (auth.currentUser != null){
             isSignedIn.value = true
@@ -53,6 +55,12 @@ class MainViewModel @Inject constructor(
     }
 
     private fun getUserData() {
+        firestore.collection("users").document(auth.currentUser!!.uid).get().addOnSuccessListener {
+            val user = it.toObject(User::class.java)
+            userData.value = user
+        }.addOnFailureListener {
+            Log.d("User Data", "getUserData: ${it.message}")
+        }
     }
 
     fun signUp(context : Context,name : String, phoneNumber : String, email : String, password : String){
