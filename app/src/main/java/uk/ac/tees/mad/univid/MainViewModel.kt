@@ -44,6 +44,9 @@ class MainViewModel @Inject constructor(
     private val _response = MutableStateFlow<ApiResponse?>(null)
     val response: StateFlow<ApiResponse?> = _response
 
+    private val _propertyData = MutableLiveData<List<PropertyData>>()
+    val propertyData: LiveData<List<PropertyData>> = _propertyData
+
     val userData = mutableStateOf<User?>(null)
 
     init {
@@ -152,7 +155,7 @@ class MainViewModel @Inject constructor(
     fun getProperties(){
         viewModelScope.launch {
             repository.getAllProperty().collect {
-                Log.d("Response DB",it.toString())
+                _propertyData.value = it
             }
         }
     }

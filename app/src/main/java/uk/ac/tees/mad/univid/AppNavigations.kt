@@ -9,6 +9,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import uk.ac.tees.mad.univid.Screens.DetailScreen
+import uk.ac.tees.mad.univid.Screens.EditProfileScreen
+import uk.ac.tees.mad.univid.Screens.FavoriteScreen
 import uk.ac.tees.mad.univid.Screens.HomeScreen
 import uk.ac.tees.mad.univid.Screens.LoginScreen
 import uk.ac.tees.mad.univid.Screens.ProfileScreen
@@ -26,6 +28,8 @@ sealed class AppNavigations(val route : String){
         }
     }
     object ProfileScreen : AppNavigations("profile_screen")
+    object EditProfileScreen : AppNavigations("edit_profile_screen")
+    object FavoriteScreen : AppNavigations("favorite_screen")
 }
 
 @Composable
@@ -58,6 +62,12 @@ fun AppNavigation(){
         }
         composable(AppNavigations.ProfileScreen.route){
             ProfileScreen(vm, navController)
+        }
+        composable(AppNavigations.EditProfileScreen.route){
+            EditProfileScreen(vm, navController)
+        }
+        composable(AppNavigations.FavoriteScreen.route){
+            FavoriteScreen(vm, navController)
         }
     }
     }

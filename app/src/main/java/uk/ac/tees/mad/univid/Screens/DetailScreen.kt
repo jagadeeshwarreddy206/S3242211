@@ -115,7 +115,7 @@ fun DetailScreen(id: String, vm: MainViewModel, navController: NavController) {
                     )
                     Spacer(modifier = Modifier.height(10.dp))
                     Text(
-                        text = property?.propertyUrl ?: "N/A",
+                        text = property?.contactUrl ?: "N/A",
                         fontFamily = poppins,
                         fontWeight = FontWeight.SemiBold
                     )

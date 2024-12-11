@@ -124,9 +124,20 @@ fun ProfileScreen(vm: MainViewModel, navController: NavHostController) {
                 Text(text = "Loading...")
             }
             Column(Modifier.padding(horizontal = 24.dp)) {
-                Spacer(modifier = Modifier.height(10.dp))
-                Row(Modifier.fillMaxWidth()){
+                Spacer(modifier = Modifier.height(20.dp))
+                Row(Modifier.fillMaxWidth().clickable {
+
+                }){
                     Text(text = "Favorite Properties")
+                    Spacer(modifier = Modifier.weight(1f))
+                    Icon(imageVector = Icons.Default.KeyboardArrowRight, contentDescription = null,
+                        modifier = Modifier.align(Alignment.CenterVertically))
+                }
+                Spacer(modifier = Modifier.height(20.dp))
+                Row(Modifier.fillMaxWidth().clickable {
+
+                }){
+                    Text(text = "Log Out")
                     Spacer(modifier = Modifier.weight(1f))
                     Icon(imageVector = Icons.Default.KeyboardArrowRight, contentDescription = null,
                         modifier = Modifier.align(Alignment.CenterVertically))
