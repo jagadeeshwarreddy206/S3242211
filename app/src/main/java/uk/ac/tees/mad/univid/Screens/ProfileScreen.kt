@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import org.jetbrains.annotations.Async
+import uk.ac.tees.mad.univid.AppNavigations
 import uk.ac.tees.mad.univid.MainViewModel
 import uk.ac.tees.mad.univid.R
 import uk.ac.tees.mad.univid.ui.theme.poppins
@@ -126,7 +127,7 @@ fun ProfileScreen(vm: MainViewModel, navController: NavHostController) {
             Column(Modifier.padding(horizontal = 24.dp)) {
                 Spacer(modifier = Modifier.height(20.dp))
                 Row(Modifier.fillMaxWidth().clickable {
-
+                    navController.navigate(AppNavigations.FavoriteScreen.route)
                 }){
                     Text(text = "Favorite Properties")
                     Spacer(modifier = Modifier.weight(1f))
@@ -135,7 +136,10 @@ fun ProfileScreen(vm: MainViewModel, navController: NavHostController) {
                 }
                 Spacer(modifier = Modifier.height(20.dp))
                 Row(Modifier.fillMaxWidth().clickable {
-
+                    vm.logout()
+                    navController.navigate(AppNavigations.LoginScreen.route){
+                        popUpTo(0)
+                    }
                 }){
                     Text(text = "Log Out")
                     Spacer(modifier = Modifier.weight(1f))

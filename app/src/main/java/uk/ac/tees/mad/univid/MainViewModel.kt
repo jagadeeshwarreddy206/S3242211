@@ -209,4 +209,9 @@ class MainViewModel @Inject constructor(
          transactionType = this.transactionType
         )
     }
+
+    fun logout() {
+        auth.signOut()
+        isSignedIn.value = false
+    }
 }
