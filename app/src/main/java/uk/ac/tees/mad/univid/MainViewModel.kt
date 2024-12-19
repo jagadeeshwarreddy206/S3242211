@@ -1,17 +1,20 @@
 package uk.ac.tees.mad.univid
 
 import android.content.Context
+import android.net.Uri
 import android.util.Log
 import android.widget.Toast
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.core.net.toUri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -35,6 +38,7 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val auth : FirebaseAuth,
     private val firestore : FirebaseFirestore,
+    private val storage : FirebaseStorage,
     private val repository: AppRepository
 ) : ViewModel() {
 
@@ -213,5 +217,32 @@ class MainViewModel @Inject constructor(
     fun logout() {
         auth.signOut()
         isSignedIn.value = false
+    }
+
+    fun updateProfilePicture(context : Context, image : Uri) {
+        isLoading.value = true
+        storage.reference.child("users/${auth.currentUser!!.uid}").putFile(image).addOnSuccessListener {
+            it.storage.downloadUrl.addOnSuccessListener {
+                firestore.collection("users").document(auth.currentUser!!.uid).update("profilePictureUrl",it.toString())
+                isLoading.value = false
+                Toast.makeText(context,"Profile Picture Updated",Toast.LENGTH_SHORT).show()
+                getUserData()
+            }.addOnFailureListener {
+                isLoading.value = false
+                Toast.makeText(context,it.message,Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    fun updateUserData(context: Context, name: String, phoneNumber: String) {
+        isLoading.value = true
+        firestore.collection("users").document(auth.currentUser!!.uid).update("name",name,"phoneNumber",phoneNumber).addOnSuccessListener {
+            isLoading.value = false
+            Toast.makeText(context, "User Data Updated", Toast.LENGTH_SHORT).show()
+            getUserData()
+        }.addOnFailureListener {
+            isLoading.value = false
+            Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+        }
     }
 }

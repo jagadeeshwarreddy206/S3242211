@@ -64,6 +64,9 @@ fun ProfileScreen(vm: MainViewModel, navController: NavHostController) {
                         modifier = Modifier
                             .align(Alignment.CenterVertically)
                             .padding(end = 10.dp)
+                            .clickable {
+                                navController.navigate(AppNavigations.EditProfileScreen.route)
+                            }
                     )
                 }
             })
