@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "896311794096",
-    "project_id": "tenant-finder-950d2",
+    "project_number": "387315412262",
+    "project_id": "tenent-finder-ac179",
     "storage_bucket": "tenant-finder-950d2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:896311794096:android:9452a46c439953097d5e75",
+        "mobilesdk_app_id": "1:387315412262:android:2f553737c11634a8c7e5e7",
         "android_client_info": {
           "package_name": "uk.ac.tees.mad.univid"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDYGUljnD4TW_JEz_KHwgbAsk0wd3IN7Yo"
+          "current_key": "AIzaSyCSnuEaqw3r3TLv2DQ3zxVUos1uSVCaEDY"
         }
       ],
       "services": {
